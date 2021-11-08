@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.nav {
+  background-color: antiquewhite;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.image {
+  padding-top: 100px;
+}
+
+.home {
+  padding-top: 100px;
+}
