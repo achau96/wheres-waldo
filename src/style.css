@@ -17,6 +17,10 @@
   padding-top: 100px;
 }
 
+.image1 {
+  cursor: url('./components/target3.png') 24 24, auto;
+}
+
 .home {
   padding-top: 100px;
 }
