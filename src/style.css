@@ -24,3 +24,10 @@
 .home {
   padding-top: 100px;
 }
+
+.dropdown {
+  width: 100px;
+  height: 50px;
+  background: white;
+  position: absolute;
+}

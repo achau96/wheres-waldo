@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './style.css';
 import NavBar from './components/NavBar';
@@ -7,7 +7,7 @@ import Image1 from './components/Image1';
 import Image2 from './components/Image2';
 
 function App() {
-  const [timer, setTimer] = useState([0, 0]);
+  // const [timer, setTimer] = useState([0, 0]);
 
   return (
     <Router>

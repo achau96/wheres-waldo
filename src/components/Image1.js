@@ -1,20 +1,47 @@
+import React, { useEffect, useState } from 'react';
 import image1 from './hiddenobject.png';
+import DropDownMenu from './DropDownMenu';
 
 const Image1 = () => {
+  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+  const [toggleMenu, setMenu] = useState(false);
+
+  const _onMouseMove = (e) => {
+    setCoordinates((prevState) => {
+      return { x: e.pageX, y: e.pageY };
+    });
+  };
+
+  useEffect(() => {
+    console.log(`X: ${coordinates.x}, Y: ${coordinates.y}`);
+    console.log(`Active: ${toggleMenu}`);
+  }, [coordinates, toggleMenu]);
+
   return (
     <div className="image">
       <div>This is where image 1 will go</div>
       <div>
-        <img src={image1} className="image1" alt="image1" useMap="#testmap" />
+        <img
+          src={image1}
+          className="image1"
+          alt="image1"
+          useMap="#testmap"
+          onClick={(e) => {
+            _onMouseMove(e);
+            setMenu((prevState) => !prevState);
+            console.log('not a toaster');
+          }}
+        />
         <map name="testmap">
           <area
             shape="rect"
+            className="image1"
             coords="645,336,676,371"
             onClick={() => console.log('this is toaster')}
-            href="#"
             alt="test"
           />
         </map>
+        {toggleMenu && <DropDownMenu coordinates={coordinates} />}
       </div>
     </div>
   );
