@@ -22,7 +22,7 @@ const Image2 = () => {
 
   return (
     <div className="image">
-      <div>This is where image 2 will go</div>
+      <div>3 images</div>
       <div>
         <img
           src={image2}

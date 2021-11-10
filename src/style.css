@@ -14,11 +14,21 @@
 }
 
 .image {
-  padding-top: 100px;
+  padding-top: 50px;
 }
 
 .cursor {
   cursor: url('./components/target3.png') 24 24, auto;
+}
+
+.image1 {
+  width: 800px;
+  height: auto;
+}
+
+.image2 {
+  width: 70%;
+  height: auto;
 }
 
 .home {
