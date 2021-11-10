@@ -7,7 +7,11 @@ const DropDownMenu = (props) => {
         left: `${props.coordinates.x}px`,
       }}
     >
-      Hello
+      <ul>
+        <li onClick={() => console.log('toaster')}>Toaster</li>
+        <li>Rubik's Cube</li>
+        <li>Etc</li>
+      </ul>
     </div>
   );
 };

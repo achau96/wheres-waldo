@@ -37,7 +37,13 @@ const Image1 = () => {
             shape="rect"
             className="image1"
             coords="645,336,676,371"
-            onClick={() => console.log('this is toaster')}
+            onClick={(e) => {
+              e.preventDefault();
+              console.log(e);
+              _onMouseMove(e);
+              setMenu((prevState) => !prevState);
+              console.log('this is toaster');
+            }}
             alt="test"
           />
         </map>
