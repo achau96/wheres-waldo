@@ -8,9 +8,33 @@ const DropDownMenu = (props) => {
       }}
     >
       <ul>
-        <li onClick={() => console.log('toaster')}>Toaster</li>
-        <li>Rubik's Cube</li>
-        <li>Etc</li>
+        <li
+          className="dropItem"
+          onClick={() => {
+            console.log(props.itemList[0]);
+            props.activeMenu();
+          }}
+        >
+          {props.itemList[0]}
+        </li>
+        <li
+          className="dropItem"
+          onClick={() => {
+            console.log(props.itemList[1]);
+            props.activeMenu();
+          }}
+        >
+          {props.itemList[1]}
+        </li>
+        <li
+          className="dropItem"
+          onClick={() => {
+            console.log(props.itemList[2]);
+            props.activeMenu();
+          }}
+        >
+          {props.itemList[2]}
+        </li>
       </ul>
     </div>
   );

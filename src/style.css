@@ -17,7 +17,7 @@
   padding-top: 100px;
 }
 
-.image1 {
+.cursor {
   cursor: url('./components/target3.png') 24 24, auto;
 }
 
@@ -27,7 +27,17 @@
 
 .dropdown {
   width: 100px;
-  height: 50px;
+  height: auto;
   background: white;
   position: absolute;
+}
+
+.dropItem {
+  list-style: none;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+.dropItem:hover {
+  background: lightgrey;
+  cursor: pointer;
 }

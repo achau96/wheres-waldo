@@ -12,6 +12,9 @@ const Image1 = () => {
     });
   };
 
+  const activeMenu = () => {
+    setMenu((prevState) => !prevState);
+  };
   useEffect(() => {
     console.log(`X: ${coordinates.x}, Y: ${coordinates.y}`);
     console.log(`Active: ${toggleMenu}`);
@@ -23,12 +26,12 @@ const Image1 = () => {
       <div>
         <img
           src={image1}
-          className="image1"
+          className="image1 cursor"
           alt="image1"
           useMap="#testmap"
           onClick={(e) => {
             _onMouseMove(e);
-            setMenu((prevState) => !prevState);
+            activeMenu();
             console.log('not a toaster');
           }}
         />
@@ -47,7 +50,13 @@ const Image1 = () => {
             alt="test"
           />
         </map>
-        {toggleMenu && <DropDownMenu coordinates={coordinates} />}
+        {toggleMenu && (
+          <DropDownMenu
+            coordinates={coordinates}
+            activeMenu={activeMenu}
+            itemList={[`toaster`, `cube`, `planet`]}
+          />
+        )}
       </div>
     </div>
   );

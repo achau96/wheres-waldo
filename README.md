@@ -10,3 +10,4 @@ What Did I learn?
 Problems
 
 1. Map with image mapping not taking in dropcomponent.
+2. Should try reusing image component instead of creating 2 seperate js files.
