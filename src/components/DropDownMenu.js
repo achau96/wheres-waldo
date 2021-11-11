@@ -13,6 +13,7 @@ const DropDownMenu = (props) => {
           onClick={() => {
             console.log(props.itemList[0]);
             props.activeMenu();
+            console.log(props.itemStatus);
           }}
         >
           {props.itemList[0]}
@@ -22,6 +23,7 @@ const DropDownMenu = (props) => {
           onClick={() => {
             console.log(props.itemList[1]);
             props.activeMenu();
+            console.log(props.itemStatus);
           }}
         >
           {props.itemList[1]}

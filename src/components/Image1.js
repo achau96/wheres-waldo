@@ -7,7 +7,12 @@ import { db } from '../firebase';
 const Image1 = () => {
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const [toggleMenu, setMenu] = useState(false);
-  const [itemList, setList] = useState({});
+  const [itemCoords, setItemCoords] = useState({});
+  const [itemStatus, setItemStatus] = useState({
+    toaster: false,
+    planet: false,
+    cube: false,
+  });
 
   const _onMouseMove = (e) => {
     setCoordinates((prevState) => {
@@ -24,16 +29,13 @@ const Image1 = () => {
       const querySnapshot = await getDocs(collection(db, 'coordinates'));
       querySnapshot.forEach((doc) => {
         // console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-        setList(doc.data());
+        if (doc.id === `2vEUTXOfMH8kutrFfoog`) {
+          setItemCoords(doc.data());
+        }
       });
     }
     uploadCoords();
   }, []);
-
-  // useEffect(() => {
-  //   console.log(`X: ${coordinates.x}, Y: ${coordinates.y}`);
-  //   console.log(`Active: ${toggleMenu}`);
-  // }, [coordinates, toggleMenu]);
 
   return (
     <div className="image">
@@ -53,12 +55,36 @@ const Image1 = () => {
           <area
             shape="rect"
             className="image1 cursor"
-            coords={itemList[`toaster`]}
+            coords={itemCoords[`toaster`]}
             onClick={(e) => {
               e.preventDefault();
               _onMouseMove(e);
               setMenu((prevState) => !prevState);
-              console.log(`data from firestore`);
+              setItemStatus({ ...itemStatus, toaster: true });
+            }}
+            alt="test"
+          />
+          <area
+            shape="rect"
+            className="image1 cursor"
+            coords={itemCoords[`planet`]}
+            onClick={(e) => {
+              e.preventDefault();
+              _onMouseMove(e);
+              setMenu((prevState) => !prevState);
+              setItemStatus({ ...itemStatus, planet: true });
+            }}
+            alt="test"
+          />
+          <area
+            shape="rect"
+            className="image1 cursor"
+            coords={itemCoords[`cube`]}
+            onClick={(e) => {
+              e.preventDefault();
+              _onMouseMove(e);
+              setMenu((prevState) => !prevState);
+              setItemStatus({ ...itemStatus, cube: true });
             }}
             alt="test"
           />
@@ -67,7 +93,8 @@ const Image1 = () => {
           <DropDownMenu
             coordinates={coordinates}
             activeMenu={activeMenu}
-            itemList={[`Toaster`, `Cube`, `Planet`]}
+            itemStatus={itemStatus}
+            itemList={[`toaster`, `cube`, `planet`]}
           />
         )}
       </div>
@@ -78,6 +105,8 @@ const Image1 = () => {
 export default Image1;
 
 // function to get x and y coordinate of image
-// const image1 = document.querySelector('.image1')
-// image1.onclick = function(e){
-//   let x = e.pageX; console.log("X: " + e.offsetX + "Y: " + e.offsetY )}
+// const image1 = document.querySelector('.image1');
+// image1.onclick = function (e) {
+//   let x = e.pageX;
+//   console.log('X: ' + e.offsetX + 'Y: ' + e.offsetY);
+// };
