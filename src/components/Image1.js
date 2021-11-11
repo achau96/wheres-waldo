@@ -7,6 +7,7 @@ import { db } from '../firebase';
 const Image1 = () => {
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const [toggleMenu, setMenu] = useState(false);
+  const [itemList, setList] = useState({});
 
   const _onMouseMove = (e) => {
     setCoordinates((prevState) => {
@@ -22,7 +23,8 @@ const Image1 = () => {
     async function uploadCoords() {
       const querySnapshot = await getDocs(collection(db, 'coordinates'));
       querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+        // console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+        setList(doc.data());
       });
     }
     uploadCoords();
@@ -51,13 +53,12 @@ const Image1 = () => {
           <area
             shape="rect"
             className="image1 cursor"
-            coords="752,389,780,423"
+            coords={itemList[`toaster`]}
             onClick={(e) => {
               e.preventDefault();
-              console.log(e);
               _onMouseMove(e);
               setMenu((prevState) => !prevState);
-              console.log('this is toaster');
+              console.log(`data from firestore`);
             }}
             alt="test"
           />
