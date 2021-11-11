@@ -6,6 +6,8 @@ This project was created based off of The Odin Project, Where's Waldo?
    There were some changes which I had to revise.
 2. Image mapping. May need to install npm package, but as of this current version,
    just uses html basics.
+3. Used Cloud Firestore (NoSQL cloud database) to sync coordinates to prevent
+   cheating by looking at coordinates.
 
 ## Problems
 

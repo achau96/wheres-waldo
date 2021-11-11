@@ -38,7 +38,7 @@ const Image2 = () => {
           <DropDownMenu
             coordinates={coordinates}
             activeMenu={activeMenu}
-            itemList={[`unicorn`, `robot`, `panda`]}
+            itemList={[`Unicorn`, `Robot`, `Panda`]}
           />
         )}
       </div>

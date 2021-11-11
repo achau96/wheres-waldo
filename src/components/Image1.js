@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import image1 from './hiddenobject.png';
 import DropDownMenu from './DropDownMenu';
+import { getDocs, collection } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const Image1 = () => {
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
@@ -15,10 +17,21 @@ const Image1 = () => {
   const activeMenu = () => {
     setMenu((prevState) => !prevState);
   };
+
   useEffect(() => {
-    console.log(`X: ${coordinates.x}, Y: ${coordinates.y}`);
-    console.log(`Active: ${toggleMenu}`);
-  }, [coordinates, toggleMenu]);
+    async function uploadCoords() {
+      const querySnapshot = await getDocs(collection(db, 'coordinates'));
+      querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+      });
+    }
+    uploadCoords();
+  }, []);
+
+  // useEffect(() => {
+  //   console.log(`X: ${coordinates.x}, Y: ${coordinates.y}`);
+  //   console.log(`Active: ${toggleMenu}`);
+  // }, [coordinates, toggleMenu]);
 
   return (
     <div className="image">
@@ -32,7 +45,6 @@ const Image1 = () => {
           onClick={(e) => {
             _onMouseMove(e);
             activeMenu();
-            console.log('not a toaster');
           }}
         />
         <map name="testmap">
@@ -54,7 +66,7 @@ const Image1 = () => {
           <DropDownMenu
             coordinates={coordinates}
             activeMenu={activeMenu}
-            itemList={[`toaster`, `cube`, `planet`]}
+            itemList={[`Toaster`, `Cube`, `Planet`]}
           />
         )}
       </div>
