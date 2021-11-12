@@ -5,6 +5,7 @@ import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const Image1 = () => {
+  const [time, setTime] = useState(0);
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const [toggleMenu, setMenu] = useState(false);
   const [itemCoords, setItemCoords] = useState({});
@@ -25,6 +26,13 @@ const Image1 = () => {
   };
 
   useEffect(() => {
+    const startCount = () =>
+      setInterval(() => setTime((prevState) => prevState + 1), 1000);
+    startCount();
+    return () => clearInterval(startCount);
+  }, []);
+
+  useEffect(() => {
     async function uploadCoords() {
       const querySnapshot = await getDocs(collection(db, 'coordinates'));
       querySnapshot.forEach((doc) => {
@@ -39,6 +47,7 @@ const Image1 = () => {
 
   return (
     <div className="image">
+      <div className="timer">Time Passed: {time}</div>
       <div>This is where image 1 will go</div>
       <div>
         <img
