@@ -1,6 +1,5 @@
 const DropDownMenu = (props) => {
   const clickHandler = (item, activeItem) => {
-    console.log(item);
     props.activeMenu();
     console.log(props.itemStatus);
     if (activeItem === item) {
@@ -18,25 +17,37 @@ const DropDownMenu = (props) => {
     >
       <ul>
         <li
-          className="dropItem"
+          className={`dropItem ${
+            props.itemStatus[props.itemList[0]] ? 'line' : null
+          }`}
           onClick={() => {
-            clickHandler(props.itemList[0], props.currentItem);
+            return !props.itemStatus[props.itemList[0]]
+              ? clickHandler(props.itemList[0], props.currentItem)
+              : null;
           }}
         >
           {props.itemList[0]}
         </li>
         <li
-          className="dropItem"
+          className={`dropItem ${
+            props.itemStatus[props.itemList[1]] ? 'line' : null
+          }`}
           onClick={() => {
-            clickHandler(props.itemList[1], props.currentItem);
+            return !props.itemStatus[props.itemList[1]]
+              ? clickHandler(props.itemList[1], props.currentItem)
+              : null;
           }}
         >
           {props.itemList[1]}
         </li>
         <li
-          className="dropItem"
+          className={`dropItem ${
+            props.itemStatus[props.itemList[2]] ? 'line' : null
+          }`}
           onClick={() => {
-            clickHandler(props.itemList[2], props.currentItem);
+            return !props.itemStatus[props.itemList[2]]
+              ? clickHandler(props.itemList[2], props.currentItem)
+              : null;
           }}
         >
           {props.itemList[2]}
