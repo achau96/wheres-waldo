@@ -1,4 +1,13 @@
 const DropDownMenu = (props) => {
+  const clickHandler = (item, activeItem) => {
+    console.log(item);
+    props.activeMenu();
+    console.log(props.itemStatus);
+    if (activeItem === item) {
+      props.handleItemUpdate(activeItem);
+    }
+  };
+
   return (
     <div
       className="dropdown"
@@ -11,9 +20,7 @@ const DropDownMenu = (props) => {
         <li
           className="dropItem"
           onClick={() => {
-            console.log(props.itemList[0]);
-            props.activeMenu();
-            console.log(props.itemStatus);
+            clickHandler(props.itemList[0], props.currentItem);
           }}
         >
           {props.itemList[0]}
@@ -21,9 +28,7 @@ const DropDownMenu = (props) => {
         <li
           className="dropItem"
           onClick={() => {
-            console.log(props.itemList[1]);
-            props.activeMenu();
-            console.log(props.itemStatus);
+            clickHandler(props.itemList[1], props.currentItem);
           }}
         >
           {props.itemList[1]}
@@ -31,8 +36,7 @@ const DropDownMenu = (props) => {
         <li
           className="dropItem"
           onClick={() => {
-            console.log(props.itemList[2]);
-            props.activeMenu();
+            clickHandler(props.itemList[2], props.currentItem);
           }}
         >
           {props.itemList[2]}

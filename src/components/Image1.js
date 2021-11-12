@@ -8,6 +8,8 @@ import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const Image1 = () => {
+  const [winStatus, setWinStatus] = useState(false);
+  const [currentItem, setCurrentItem] = useState(undefined);
   const [time, setTime] = useState(0);
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const [toggleMenu, setMenu] = useState(false);
@@ -35,6 +37,7 @@ const Image1 = () => {
     return () => clearInterval(startCount);
   }, []);
 
+  //upload coordinates from database
   useEffect(() => {
     async function uploadCoords() {
       const querySnapshot = await getDocs(collection(db, 'coordinates'));
@@ -46,6 +49,20 @@ const Image1 = () => {
     }
     uploadCoords();
   }, []);
+
+  const clickHandler = (e, object) => {
+    //set the itemstatus to true
+    //check if all items are true, if true set win to true and stop timer
+    //if not continue on with program
+    e.preventDefault();
+    _onMouseMove(e);
+    setMenu((prevState) => !prevState);
+    setCurrentItem(object);
+  };
+
+  const handleItemUpdate = (object) => {
+    setItemStatus({ ...itemStatus, [object]: true });
+  };
 
   return (
     <div className="image">
@@ -65,8 +82,7 @@ const Image1 = () => {
           alt="image1"
           useMap="#testmap"
           onClick={(e) => {
-            _onMouseMove(e);
-            activeMenu();
+            return !winStatus ? clickHandler(e, undefined) : null;
           }}
         />
         <map name="testmap">
@@ -75,10 +91,7 @@ const Image1 = () => {
             className="image1 cursor"
             coords={itemCoords[`toaster`]}
             onClick={(e) => {
-              e.preventDefault();
-              _onMouseMove(e);
-              setMenu((prevState) => !prevState);
-              setItemStatus({ ...itemStatus, toaster: true });
+              return !winStatus ? clickHandler(e, 'toaster') : null;
             }}
             alt="test"
           />
@@ -87,10 +100,7 @@ const Image1 = () => {
             className="image1 cursor"
             coords={itemCoords[`planet`]}
             onClick={(e) => {
-              e.preventDefault();
-              _onMouseMove(e);
-              setMenu((prevState) => !prevState);
-              setItemStatus({ ...itemStatus, planet: true });
+              return !winStatus ? clickHandler(e, 'planet') : null;
             }}
             alt="test"
           />
@@ -99,10 +109,7 @@ const Image1 = () => {
             className="image1 cursor"
             coords={itemCoords[`cube`]}
             onClick={(e) => {
-              e.preventDefault();
-              _onMouseMove(e);
-              setMenu((prevState) => !prevState);
-              setItemStatus({ ...itemStatus, cube: true });
+              return !winStatus ? clickHandler(e, 'cube') : null;
             }}
             alt="test"
           />
@@ -112,6 +119,8 @@ const Image1 = () => {
             coordinates={coordinates}
             activeMenu={activeMenu}
             itemStatus={itemStatus}
+            currentItem={currentItem}
+            handleItemUpdate={handleItemUpdate}
             itemList={[`toaster`, `cube`, `planet`]}
           />
         )}
