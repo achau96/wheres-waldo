@@ -5,7 +5,7 @@ const NavBar = () => {
       <div>
         <Link to="/">Logo</Link>
       </div>
-      <div>Something here</div>
+      <div className="signup">Fake Sign Up</div>
     </div>
   );
 };

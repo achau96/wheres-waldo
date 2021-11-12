@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import image1 from './hiddenobject.png';
+import cube from './image1pics/cube.png';
+import toaster from './image1pics/toaster.png';
+import planet from './image1pics/planet.png';
 import DropDownMenu from './DropDownMenu';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -36,7 +39,6 @@ const Image1 = () => {
     async function uploadCoords() {
       const querySnapshot = await getDocs(collection(db, 'coordinates'));
       querySnapshot.forEach((doc) => {
-        // console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
         if (doc.id === `2vEUTXOfMH8kutrFfoog`) {
           setItemCoords(doc.data());
         }
@@ -47,8 +49,15 @@ const Image1 = () => {
 
   return (
     <div className="image">
-      <div className="timer">Time Passed: {time}</div>
-      <div>This is where image 1 will go</div>
+      <div className="timer">
+        Time Elapsed: {new Date(time * 1000).toISOString().substr(11, 8)}
+      </div>
+      <div>
+        Find these 3 objects: Cube:{' '}
+        <img className="smallImg" src={cube} alt="cube" />
+        Toaster: <img className="smallImg" src={toaster} alt="toaster" />
+        Planet: <img className="smallImg" src={planet} alt="planet" />
+      </div>
       <div>
         <img
           src={image1}

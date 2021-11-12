@@ -51,3 +51,20 @@
   background: lightgrey;
   cursor: pointer;
 }
+
+.smallImg {
+  width: 30px;
+  height: auto;
+}
+
+.signup {
+  width: 100px;
+  height: 30px;
+  border: solid 1px lightskyblue;
+  background-color: white;
+  border-radius: 25px;
+  padding-top: 5px;
+}
+.signup:hover {
+  cursor: pointer;
+}

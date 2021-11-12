@@ -12,4 +12,4 @@ This project was created based off of The Odin Project, Where's Waldo?
 ## Problems
 
 1. Map with image mapping not taking in dropcomponent.
-2. Should try reusing image component instead of creating 2 seperate js files.
+2. Should try reusing image component instead of creating 2 seperate js files. However, since there was only 2 pictures, copy and pasting was quicker than passing more props. To be more scalable, could recreate image component.
