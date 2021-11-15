@@ -28,12 +28,20 @@ const Image2 = () => {
   };
 
   useEffect(() => {
-    const startCount = setInterval(
-      () => setTime((prevState) => prevState + 1),
-      1000
-    );
-    return () => clearInterval(startCount);
-  }, []);
+    if (!winStatus) {
+      const startCount = setInterval(
+        () => setTime((prevState) => prevState + 1),
+        1000
+      );
+      return () => clearInterval(startCount);
+    } else {
+      console.log('You win!');
+    }
+  }, [winStatus]);
+
+  useEffect(() => {
+    console.log(Object.values(itemStatus));
+  }, [itemStatus]);
 
   //upload coordinates from database
   useEffect(() => {

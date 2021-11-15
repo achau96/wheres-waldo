@@ -51,8 +51,14 @@ const Image1 = () => {
   }, []);
 
   useEffect(() => {
-    console.log();
-  });
+    const isAllTrue = (currValue) => currValue === true;
+    if (Object.values(itemStatus).every(isAllTrue)) {
+      setWinStatus(true);
+      console.log('You win!');
+    }
+    console.log(winStatus);
+  }, [itemStatus, winStatus]);
+
   const clickHandler = (e, object) => {
     //set the itemstatus to true
     //check if all items are true, if true set win to true and stop timer
