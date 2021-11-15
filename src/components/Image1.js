@@ -31,9 +31,9 @@ const Image1 = () => {
   };
 
   useEffect(() => {
-    const startCount = () =>
-      setInterval(() => setTime((prevState) => prevState + 1), 1000);
-    startCount();
+    const startCount = setInterval(() => {
+      setTime((prevState) => prevState + 1);
+    }, 1000);
     return () => clearInterval(startCount);
   }, []);
 
@@ -50,6 +50,9 @@ const Image1 = () => {
     uploadCoords();
   }, []);
 
+  useEffect(() => {
+    console.log();
+  });
   const clickHandler = (e, object) => {
     //set the itemstatus to true
     //check if all items are true, if true set win to true and stop timer
@@ -70,7 +73,7 @@ const Image1 = () => {
         Time Elapsed: {new Date(time * 1000).toISOString().substr(11, 8)}
       </div>
       <div>
-        Find these 3 objects: Cube:{' '}
+        Find these 3 objects: Cube:
         <img className="smallImg" src={cube} alt="cube" />
         Toaster: <img className="smallImg" src={toaster} alt="toaster" />
         Planet: <img className="smallImg" src={planet} alt="planet" />

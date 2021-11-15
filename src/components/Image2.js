@@ -28,9 +28,10 @@ const Image2 = () => {
   };
 
   useEffect(() => {
-    const startCount = () =>
-      setInterval(() => setTime((prevState) => prevState + 1), 1000);
-    startCount();
+    const startCount = setInterval(
+      () => setTime((prevState) => prevState + 1),
+      1000
+    );
     return () => clearInterval(startCount);
   }, []);
 

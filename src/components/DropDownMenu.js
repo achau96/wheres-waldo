@@ -1,7 +1,6 @@
 const DropDownMenu = (props) => {
   const clickHandler = (item, activeItem) => {
     props.activeMenu();
-    console.log(props.itemStatus);
     if (activeItem === item) {
       props.handleItemUpdate(activeItem);
     }
