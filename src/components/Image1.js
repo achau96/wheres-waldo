@@ -34,8 +34,12 @@ const Image1 = () => {
     const startCount = setInterval(() => {
       setTime((prevState) => prevState + 1);
     }, 1000);
+
+    if (winStatus) {
+      clearInterval(startCount);
+    }
     return () => clearInterval(startCount);
-  }, []);
+  }, [winStatus]);
 
   //upload coordinates from database
   useEffect(() => {
