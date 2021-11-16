@@ -6,6 +6,7 @@ import planet from './image1pics/planet.png';
 import DropDownMenu from './DropDownMenu';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
+import Modal from './Modal';
 
 const Image1 = () => {
   const [display, setDisplay] = useState([false, 'You got it wrong!']);
@@ -148,6 +149,7 @@ const Image1 = () => {
           />
         )}
         {display[0] && <div className="display">{display[1]}</div>}
+        {winStatus && <Modal />}
       </div>
     </div>
   );
