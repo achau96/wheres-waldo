@@ -8,6 +8,7 @@ import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const Image1 = () => {
+  const [display, setDisplay] = useState([false, 'You got it wrong!']);
   const [winStatus, setWinStatus] = useState(false);
   const [currentItem, setCurrentItem] = useState(undefined);
   const [time, setTime] = useState(0);
@@ -19,6 +20,9 @@ const Image1 = () => {
     planet: false,
     cube: false,
   });
+  const putOnDisplay = (message) => {
+    setDisplay([true, message]);
+  };
 
   const _onMouseMove = (e) => {
     setCoordinates((prevState) => {
@@ -30,6 +34,12 @@ const Image1 = () => {
     setMenu((prevState) => !prevState);
   };
 
+  useEffect(() => {
+    const clearMessage = setTimeout(() => setDisplay([false, '']), 3000);
+    return () => clearTimeout(clearMessage);
+  }, [display]);
+
+  //checks if you won and stops timer
   useEffect(() => {
     const startCount = setInterval(() => {
       setTime((prevState) => prevState + 1);
@@ -54,13 +64,12 @@ const Image1 = () => {
     uploadCoords();
   }, []);
 
+  //set win status when you find all of the objects
   useEffect(() => {
     const isAllTrue = (currValue) => currValue === true;
     if (Object.values(itemStatus).every(isAllTrue)) {
       setWinStatus(true);
-      console.log('You win!');
     }
-    console.log(winStatus);
   }, [itemStatus, winStatus]);
 
   const clickHandler = (e, object) => {
@@ -134,9 +143,11 @@ const Image1 = () => {
             itemStatus={itemStatus}
             currentItem={currentItem}
             handleItemUpdate={handleItemUpdate}
+            putOnDisplay={putOnDisplay}
             itemList={[`toaster`, `cube`, `planet`]}
           />
         )}
+        {display[0] && <div className="display">{display[1]}</div>}
       </div>
     </div>
   );

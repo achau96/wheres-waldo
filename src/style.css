@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   text-align: center;
+  overflow: visible;
 }
 
 .nav {
@@ -71,4 +72,15 @@
 
 .line {
   text-decoration: line-through;
+}
+
+.display {
+  position: fixed;
+  top: 50px;
+  padding-top: 10px;
+  width: 100%;
+  height: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: chartreuse;
 }

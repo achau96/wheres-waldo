@@ -3,6 +3,9 @@ const DropDownMenu = (props) => {
     props.activeMenu();
     if (activeItem === item) {
       props.handleItemUpdate(activeItem);
+      props.putOnDisplay(`You found ${activeItem}!`);
+    } else {
+      props.putOnDisplay('Please try again.');
     }
   };
 

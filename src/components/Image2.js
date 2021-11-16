@@ -5,6 +5,7 @@ import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const Image2 = () => {
+  const [display, setDisplay] = useState(true);
   const [winStatus, setWinStatus] = useState(false);
   const [currentItem, setCurrentItem] = useState(undefined);
   const [time, setTime] = useState(0);
@@ -17,6 +18,10 @@ const Image2 = () => {
     robot: false,
   });
 
+  const putOnDisplay = (message) => {
+    setDisplay([true, message]);
+  };
+
   const _onMouseMove = (e) => {
     setCoordinates((prevState) => {
       return { x: e.pageX, y: e.pageY };
@@ -28,20 +33,29 @@ const Image2 = () => {
   };
 
   useEffect(() => {
-    if (!winStatus) {
-      const startCount = setInterval(
-        () => setTime((prevState) => prevState + 1),
-        1000
-      );
-      return () => clearInterval(startCount);
-    } else {
-      console.log('You win!');
-    }
-  }, [winStatus]);
+    const clearMessage = setTimeout(() => setDisplay([false, '']), 3000);
+    return () => clearTimeout(clearMessage);
+  }, [display]);
 
   useEffect(() => {
-    console.log(Object.values(itemStatus));
-  }, [itemStatus]);
+    const startCount = setInterval(() => {
+      setTime((prevState) => prevState + 1);
+    }, 1000);
+
+    if (winStatus) {
+      clearInterval(startCount);
+    }
+    return () => clearInterval(startCount);
+  }, [winStatus]);
+
+  //set win status when you find all of the objects
+  useEffect(() => {
+    const isAllTrue = (currValue) => currValue === true;
+    if (Object.values(itemStatus).every(isAllTrue)) {
+      setWinStatus(true);
+      console.log('You win!');
+    }
+  }, [itemStatus, winStatus]);
 
   //upload coordinates from database
   useEffect(() => {
@@ -127,10 +141,12 @@ const Image2 = () => {
             activeMenu={activeMenu}
             itemStatus={itemStatus}
             currentItem={currentItem}
+            putOnDisplay={putOnDisplay}
             handleItemUpdate={handleItemUpdate}
             itemList={[`unicorn`, `robot`, `panda`]}
           />
         )}
+        {display[0] && <div className="display">{display[1]}</div>}
       </div>
     </div>
   );
