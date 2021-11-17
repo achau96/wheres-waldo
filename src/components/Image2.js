@@ -3,8 +3,10 @@ import image2 from './hiddenobject2.jpeg';
 import DropDownMenu from './DropDownMenu';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
+import Modal from './Modal';
 
 const Image2 = () => {
+  const [modal, setModal] = useState(false);
   const [display, setDisplay] = useState(true);
   const [winStatus, setWinStatus] = useState(false);
   const [currentItem, setCurrentItem] = useState(undefined);
@@ -17,6 +19,10 @@ const Image2 = () => {
     panda: false,
     robot: false,
   });
+
+  const modalOff = () => {
+    setModal(false);
+  };
 
   const putOnDisplay = (message) => {
     setDisplay([true, message]);
@@ -31,6 +37,12 @@ const Image2 = () => {
   const activeMenu = () => {
     setMenu((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    if (winStatus === true) {
+      setModal(true);
+    }
+  }, [winStatus]);
 
   useEffect(() => {
     const clearMessage = setTimeout(() => setDisplay([false, '']), 3000);
@@ -147,6 +159,7 @@ const Image2 = () => {
           />
         )}
         {display[0] && <div className="display">{display[1]}</div>}
+        {modal && <Modal modalOff={modalOff} time={time} image={2} />}
       </div>
     </div>
   );

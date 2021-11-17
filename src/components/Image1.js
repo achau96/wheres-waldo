@@ -9,6 +9,7 @@ import { db } from '../firebase';
 import Modal from './Modal';
 
 const Image1 = () => {
+  const [modal, setModal] = useState(false);
   const [display, setDisplay] = useState([false, 'You got it wrong!']);
   const [winStatus, setWinStatus] = useState(false);
   const [currentItem, setCurrentItem] = useState(undefined);
@@ -31,9 +32,19 @@ const Image1 = () => {
     });
   };
 
+  const modalOff = () => {
+    setModal(false);
+  };
+
   const activeMenu = () => {
     setMenu((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    if (winStatus === true) {
+      setModal(true);
+    }
+  }, [winStatus]);
 
   useEffect(() => {
     const clearMessage = setTimeout(() => setDisplay([false, '']), 3000);
@@ -149,7 +160,7 @@ const Image1 = () => {
           />
         )}
         {display[0] && <div className="display">{display[1]}</div>}
-        {winStatus && <Modal />}
+        {modal && <Modal modalOff={modalOff} time={time} />}
       </div>
     </div>
   );

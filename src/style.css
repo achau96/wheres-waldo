@@ -88,6 +88,7 @@
 .modal {
   position: absolute;
   display: flex;
+  top: 0;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -96,6 +97,68 @@
 }
 
 .modal-content {
-  width: 500px;
+  width: 400px;
   height: 500px;
+  background: white;
+  border-radius: 25px;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.modal-title {
+  font-size: 40px;
+  font-weight: bold;
+  color: chartreuse;
+  margin-bottom: 25px;
+}
+
+.modal-body {
+  margin-bottom: 10px;
+}
+.input {
+  font-size: 20px;
+  padding: 2px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: red;
+  width: 50px;
+  height: 30px;
+  border-radius: 25px;
+  border: solid 1px black;
+}
+
+.send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: green;
+  width: 50px;
+  height: 30px;
+  border-radius: 25px;
+  border: solid 1px black;
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+.send:hover {
+  cursor: pointer;
 }
